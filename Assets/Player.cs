@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private float hp = 100;
+    private float hp = 100f;
     private int exp = 0;
     private int level = 1;
     private int levelCount = 4;
@@ -26,7 +26,9 @@ public class Player : MonoBehaviour
         exp += expValue;
         if (exp % levelCount == 0)
         {
+            Debug.Log("Level Up!");
             level++;
+            levelCount++;
         }
     }
 
@@ -35,13 +37,21 @@ public class Player : MonoBehaviour
         if (coll.gameObject.CompareTag("Enemy"))
         {
             TakeDamage(10.0f);
-
         }
+
     }
 
     void TakeDamage(float damage)
     {
-        hp -= damage;
+        if(hp - damage <= 0)
+        {
+            Die();
+        }
+        else
+        {
+            hp -= damage;
+        }
+        
     }
 
     void Die()

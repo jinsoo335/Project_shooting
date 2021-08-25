@@ -7,7 +7,7 @@ public class Bullet : MonoBehaviour
     public Enemy take;
     public Transform target;
     public Transform playerPos;
-    public float bulletSpeed = 1.5f;
+    public float bulletSpeed = 3f;
     public float bulletDamage = 10f;
     Collider2D[] cols;
     GameObject Enemy;
@@ -67,7 +67,8 @@ public class Bullet : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals("Enemy"))
         {
-            //take.TakeDamage(bulletDamage);
+            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+            enemy.TakeDamage(bulletDamage);
             DestroySelf();
         }
     }
