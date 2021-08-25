@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject);
     }
 
-    void TakeDamage(float damgae)
+    public void TakeDamage(float damgae)
     {
         health -= damgae;
 
