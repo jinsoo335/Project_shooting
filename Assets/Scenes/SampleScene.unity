@@ -401,7 +401,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87364f3144005bf408d2dfe00b88a04d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  xScreenHalfSize: 0
+  yScreenHalfSize: 0
+  playerPos: {fileID: 0}
   EnemyPrefab: {fileID: 5307260963540650344, guid: 2932b452c566e4b40bde5b425047ad3f, type: 3}
+  ItemPrefab: {fileID: 6759083740100023116, guid: a870d75a2bbcb5046ba3b8ce7c52899f, type: 3}
 --- !u!4 &1530865752
 Transform:
   m_ObjectHideFlags: 0

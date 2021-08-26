@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6413635959741480578}
   - component: {fileID: 1239299228959856271}
   - component: {fileID: -528859715767456001}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Item
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e7fac78953dbbb48a79e48c6d3233c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemExp: 1
 --- !u!58 &-528859715767456001
 CircleCollider2D:
   m_ObjectHideFlags: 0

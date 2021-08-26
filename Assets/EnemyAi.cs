@@ -21,10 +21,8 @@ public class EnemyAi : MonoBehaviour
         target = GameObject.FindGameObjectWithTag("Player").transform;
 
         float distance = Vector3.Distance(transform.position, target.position);
-        Debug.Log("update");
         if (attackDelay == 0 && distance <= enemy.fieldOfVision)
         {
-            Debug.Log("asdad");
             MoveToTarget();
         }
 
@@ -32,7 +30,6 @@ public class EnemyAi : MonoBehaviour
     void MoveToTarget()
     {
         transform.Translate(new Vector2(target.position.x - transform.position.x, target.position.y - transform.position.y) * enemy.speed * Time.deltaTime);
-
     }
 
 

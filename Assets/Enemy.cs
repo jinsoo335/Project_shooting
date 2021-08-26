@@ -30,10 +30,12 @@ public class Enemy : MonoBehaviour
     void Die()
     {
         Destroy(gameObject);
+
     }
 
     public void TakeDamage(float damgae)
     {
+        Debug.Log("Hit!");
         health -= damgae;
 
         if (health <= 0)

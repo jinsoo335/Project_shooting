@@ -40,11 +40,30 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator shotBullet()
     {
-        GameObject bullet = Instantiate(BulletPrefab);
-        bullet.transform.position = transform.position;
+        Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, 10f);
 
-        yield return new WaitForSeconds(4f);
-        StartCoroutine("shotBullet");
+        if (cols.Length > 0)
+        {
+            for (int i = 0; i < cols.Length; i++)
+            {
+                if (cols[i].CompareTag("Enemy"))
+                {
+                    if (Vector3.Distance(cols[i].GetComponent<Transform>().position, transform.position) < 10f)
+                    {
+                        GameObject bullet = Instantiate(BulletPrefab);
+                        bullet.transform.position = transform.position;
+                        break;
+                    } 
+                }
+                
+            }
+            yield return new WaitForSeconds(3f);
+            StartCoroutine("shotBullet");
+        }
+        else
+        {
+            StartCoroutine("shotBullet");
+        }
 
     }
 

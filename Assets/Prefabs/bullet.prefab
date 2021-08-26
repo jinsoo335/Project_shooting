@@ -117,7 +117,7 @@ MonoBehaviour:
   target: {fileID: 0}
   playerPos: {fileID: 0}
   bulletSpeed: 1.5
-  bulletDamage: 0
+  bulletDamage: 30
 --- !u!50 &8267917345278342954
 Rigidbody2D:
   serializedVersion: 4
