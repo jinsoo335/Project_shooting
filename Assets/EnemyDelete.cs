@@ -17,7 +17,7 @@ public class EnemyDelete : MonoBehaviour
         target = GameObject.FindGameObjectWithTag("Player").transform;
 
         float distance = Vector3.Distance(transform.position, target.position);
-        if(distance > 5)
+        if(distance > 12)
         {
             Debug.Log("awwwww");
             Destroy(gameObject);

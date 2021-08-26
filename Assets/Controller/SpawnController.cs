@@ -28,8 +28,8 @@ public class SpawnController : MonoBehaviour
     {
         playerPos = player.GetComponent<Transform>();
        
-        xSpawnPos = xScreenHalfSize + (playerPos.position.x + 1);
-        ySpawnPos = yScreenHalfSize + (playerPos.position.y + 1);
+        xSpawnPos = playerPos.position.x;
+        ySpawnPos = playerPos.position.y;
 
         float xTemp = Random.Range(0.0f, xScreenHalfSize);
         float yTemp = Random.Range(0.0f, yScreenHalfSize);
@@ -39,20 +39,22 @@ public class SpawnController : MonoBehaviour
         switch (Random.Range(0, 4))
         {
             case 0:
-                xSpawnPos = Random.Range(-xSpawnPos, xSpawnPos);
-                //ySpawnPos = ySpawnPos;
+                xSpawnPos = xSpawnPos + Random.Range(-xScreenHalfSize, xScreenHalfSize);
+                ySpawnPos = ySpawnPos + yScreenHalfSize;
                 break;
             case 1:
-                ySpawnPos = Random.Range(-ySpawnPos, ySpawnPos);
-                //xSpawnPos = xSpawnPos;
+                xSpawnPos = xSpawnPos + xScreenHalfSize;
+                ySpawnPos = ySpawnPos + Random.Range(-yScreenHalfSize, yScreenHalfSize);
+                
                 break;
             case 2:
-                xSpawnPos = Random.Range(-xSpawnPos, xSpawnPos);
-                ySpawnPos = -ySpawnPos;
+                xSpawnPos = xSpawnPos + Random.Range(-xScreenHalfSize, xScreenHalfSize);
+                ySpawnPos = ySpawnPos - yScreenHalfSize;
                 break;
             default:
-                xSpawnPos = -xSpawnPos;
-                ySpawnPos = Random.Range(-ySpawnPos, ySpawnPos);
+                xSpawnPos = xSpawnPos - xScreenHalfSize;
+                ySpawnPos = ySpawnPos + Random.Range(-yScreenHalfSize, yScreenHalfSize);
+
                 break;
         }
         GameObject enemy = Instantiate(EnemyPrefab);
