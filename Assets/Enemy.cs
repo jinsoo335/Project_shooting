@@ -2,14 +2,21 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    GameObject Player;
     public float health;
     public float damage;
     public float speed;
     public float fieldOfVision;
     public float atkRange;
+    public int NowExp = 0;
+    public int MaxExp = 10;
+    int expValue = 0;
+
     protected Transform target = null;
     public Transform playerPos;
     Collider2D[] cols;
+    public GameObject gogo;
+    
 
     private void SetEnemyStatus(float _health, float _damage, float _speed, float _atkRange, float _fieldOfVision)
     {
@@ -29,6 +36,8 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
+        GameObject.Find("Player").GetComponent<Player>().levelUp(10);
+        Debug.Log("다이");
         Destroy(gameObject);
 
     }
@@ -50,6 +59,15 @@ public class Enemy : MonoBehaviour
             //TakeDamage(10);
             collision.gameObject.SetActive(false);
         }
+    }
+    public void PlayerExp(int _PlusExp)
+    {
+        NowExp += _PlusExp;
+        if (MaxExp <= NowExp)
+        {
+            Debug.Log("레벨업");
+        }
+
     }
     public virtual void Move()
     {
