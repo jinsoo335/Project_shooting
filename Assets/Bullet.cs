@@ -1,31 +1,54 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Bullet : MonoBehaviour
 {
-    public Enemy take;
-    public Transform target;
-    public Transform playerPos;
     public float bulletSpeed = 3f;
     public float bulletDamage = 10f;
-    Collider2D[] cols;
-    GameObject Enemy;
+
+    private float fieldOfVision = 10f;
+    private Transform playerPos;
+    private Collider2D Enemy;
+    private Vector3 lastEnemyPos;
+    private bool targetLockOn;
 
     void Start()
     {
+        playerPos = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        Enemy = nearEnemySearch();
+        lastEnemyPos = new Vector3(Enemy.transform.position.x, Enemy.transform.position.y, 0);
+        if (Enemy != null)
+        {
+            targetLockOn = true;
+        }
+
         Invoke("DestroySelf", 5.0f);
     }
     private void Update()
     {
-        //target = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Transform>();
-        //move();
-
-        playerPos = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        cols = Physics2D.OverlapCircleAll(playerPos.position, 10f);
-        nearMove(cols);
-
-
+        if(Enemy == null)
+        {
+            targetLockOn = false;
+        }
+        
+        if (targetLockOn)
+        {
+            try
+            {
+                moveBullet(Enemy);
+            }
+            catch(Exception ex)
+            {
+                targetLockOn = false;
+            }
+        }
+        else
+        {
+            moveBullet(lastEnemyPos);
+        }
+        
     }
 
     void DestroySelf()
@@ -33,14 +56,11 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void move()
+    public Collider2D nearEnemySearch()
     {
-        Vector2 targetPos = new Vector2(target.position.x, target.position.y); 
-        transform.position = Vector2.MoveTowards(transform.position, targetPos, bulletSpeed * Time.deltaTime);
-    }
-    public void nearMove(Collider2D[] cols)
-    {
-        if(cols.Length > 0)
+        Collider2D[] cols = Physics2D.OverlapCircleAll(playerPos.position, fieldOfVision);
+
+        if (cols.Length > 0)
         {
             float dis = 1000f;
             Collider2D nearEnemy = null;
@@ -56,16 +76,27 @@ public class Bullet : MonoBehaviour
                     }
                 }
             }
-            if (nearEnemy != null)
+            if(nearEnemy != null)
             {
-                transform.position = Vector2.MoveTowards(transform.position, nearEnemy.transform.position, bulletSpeed * Time.deltaTime);
+                return nearEnemy;
             }
+
         }
+        return null;
     }
+
+    public void moveBullet(Collider2D enemy)
+    {
+        transform.position = Vector2.MoveTowards(transform.position, enemy.transform.position, bulletSpeed * Time.deltaTime);
+    }
+    public void moveBullet(Vector3 enemy)
+    {
+        transform.Translate(enemy.normalized * bulletSpeed * Time.deltaTime);
+    }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Enemy");
         if (collision.gameObject.CompareTag("Enemy"))
         {
             Enemy enemy = collision.gameObject.GetComponent<Enemy>();

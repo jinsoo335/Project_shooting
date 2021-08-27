@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 0.01f;
+    public float playerSpeed = 0.01f;
     public GameObject BulletPrefab;
-    public float bulletSpeed = 0.02f;
-    public Transform target;
+
+    public float visionOfPlayer = 10f;
+    public float bulletSpawnSpeed = 2f;
 
     void Start()
     {
@@ -19,28 +20,27 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.A))
         {
-            transform.Translate(-speed, 0, 0);
+            transform.Translate(-playerSpeed, 0, 0);
         }
         if (Input.GetKey(KeyCode.S))
         {
-            transform.Translate(0, -speed, 0);
+            transform.Translate(0, -playerSpeed, 0);
         }
         if (Input.GetKey(KeyCode.D))
         {
-            transform.Translate(speed, 0, 0);
+            transform.Translate(playerSpeed, 0, 0);
         }
         if (Input.GetKey(KeyCode.W))
         {
-            transform.Translate(0, speed, 0);
+            transform.Translate(0, playerSpeed, 0);
         }
 
     }
 
 
-
     IEnumerator shotBullet()
     {
-        Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, 10f);
+        Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, visionOfPlayer);
 
         if (cols.Length > 0)
         {
@@ -48,24 +48,19 @@ public class PlayerController : MonoBehaviour
             {
                 if (cols[i].CompareTag("Enemy"))
                 {
-                    if (Vector3.Distance(cols[i].GetComponent<Transform>().position, transform.position) < 10f)
-                    {
-                        GameObject bullet = Instantiate(BulletPrefab);
-                        bullet.transform.position = transform.position;
-                        break;
-                    } 
+                    GameObject bullet = Instantiate(BulletPrefab);
+                    bullet.transform.position = transform.position;
+                    break;
+                    
                 }
                 
             }
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(bulletSpawnSpeed);
             StartCoroutine("shotBullet");
         }
         else
         {
             StartCoroutine("shotBullet");
         }
-
     }
-
-
 }
