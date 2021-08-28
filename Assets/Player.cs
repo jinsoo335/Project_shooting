@@ -40,6 +40,16 @@ public class Player : MonoBehaviour
         }
 
     }
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        for(int i =0; i < 9; i++)
+        {
+            if(col.gameObject.CompareTag("Tile" + i))
+            {
+                col.gameObject.GetComponentInParent<LoopBackground>().tileMove(i);
+            }
+        }
+    }
 
     void TakeDamage(float damage)
     {

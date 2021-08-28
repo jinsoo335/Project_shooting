@@ -7,7 +7,6 @@ public class Item : MonoBehaviour
     public int itemExp = 1;
     void Start()
     {
-
     }
 
 

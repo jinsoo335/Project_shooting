@@ -7,6 +7,17 @@ TagManager:
   - Enemy
   - bullet
   - Item
+  - TileBackground
+  - Tile0
+  - Tile1
+  - Tile2
+  - Tile3
+  - Tile4
+  - Tile5
+  - Tile6
+  - Tile7
+  - Tile8
+  - Tilemap
   layers:
   - Default
   - TransparentFX
@@ -22,7 +33,7 @@ TagManager:
   - Item
   - bullet
   - Enemy
-  - 
+  - TileBackground
   - 
   - 
   - 
