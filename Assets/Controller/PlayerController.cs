@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine("shotBullet");
     }
 
 
@@ -36,7 +35,10 @@ public class PlayerController : MonoBehaviour
         }
 
     }
-
+    public void bulletSpawn()
+    {
+        StartCoroutine("shotBullet");
+    }
 
     IEnumerator shotBullet()
     {

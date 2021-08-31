@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     private int exp = 0;
     private int level = 1;
     private int levelCount = 4;
-    
+
 
     void Start()
     {
@@ -20,7 +20,6 @@ public class Player : MonoBehaviour
     {
         
     }
-
     public void levelUp(int expValue)
     {
         exp += expValue;

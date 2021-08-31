@@ -36,15 +36,13 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
+        EventManager.RunEnemyDieEvent();
         GameObject.Find("Player").GetComponent<Player>().levelUp(10);
-        Debug.Log("´ÙÀÌ");
         Destroy(gameObject);
-
     }
 
     public void TakeDamage(float damgae)
     {
-        Debug.Log("Hit!");
         health -= damgae;
 
         if (health <= 0)

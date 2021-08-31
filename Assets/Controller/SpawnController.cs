@@ -15,7 +15,11 @@ public class SpawnController : MonoBehaviour
     public GameObject ItemPrefab;
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");    
+    }
+
+    public void spawnRandom()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
 
         yScreenHalfSize = Camera.main.orthographicSize;
         xScreenHalfSize = yScreenHalfSize * Camera.main.aspect;
@@ -24,7 +28,7 @@ public class SpawnController : MonoBehaviour
     }
 
 
-    IEnumerator SpawnEnemyRandom()
+    public IEnumerator SpawnEnemyRandom()
     {
         playerPos = player.GetComponent<Transform>();
        

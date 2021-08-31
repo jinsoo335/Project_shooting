@@ -23,7 +23,7 @@ public class LoopBackground : MonoBehaviour
 
     public void tileMove(int index)
     {
-        grounds = new Tilemap[9];
+        //grounds = new Tilemap[9];
         resetArray();
 
         switch (index)
@@ -108,8 +108,8 @@ public class LoopBackground : MonoBehaviour
                 {
                     grounds[j].transform.position = new Vector3(grounds[i].transform.position.x, grounds[i].transform.position.y - sellSize, 3);
                     grounds[j].tag = "Tile" + i;
-                    grounds[i].tag = "Tile" + (i + 3);
-                    grounds[i + 3].tag = "Tile" + j;
+                    grounds[i].tag = "Tile" + (j + 3);
+                    grounds[j + 3].tag = "Tile" + j;
                 }
                 resetArray();
 
@@ -126,9 +126,9 @@ public class LoopBackground : MonoBehaviour
                 for (int i = 6, j = 0; i < grounds.Length && j < 3; i++, j++)
                 {
                     grounds[j].transform.position = new Vector3(grounds[i].transform.position.x, grounds[i].transform.position.y - sellSize, 3);
-                    grounds[i].tag = "Tile" + j;
-                    grounds[j].tag = "Tile" + (j + 3);
-                    grounds[j + 3].tag = "Tile" + i;
+                    grounds[j].tag = "Tile" + i;
+                    grounds[i].tag = "Tile" + (j + 3);
+                    grounds[j + 3].tag = "Tile" + j;
                 }
                 break;
 
@@ -136,9 +136,9 @@ public class LoopBackground : MonoBehaviour
                 for (int i = 6, j = 0; i < grounds.Length && j < 3; i++, j++)
                 {
                     grounds[j].transform.position = new Vector3(grounds[i].transform.position.x, grounds[i].transform.position.y - sellSize, 3);
-                    grounds[i].tag = "Tile" + j;
-                    grounds[j].tag = "Tile" + (j + 3);
-                    grounds[j + 3].tag = "Tile" + i;
+                    grounds[j].tag = "Tile" + i;
+                    grounds[i].tag = "Tile" + (j + 3);
+                    grounds[j + 3].tag = "Tile" + j;
                 }
                 resetArray();
 
